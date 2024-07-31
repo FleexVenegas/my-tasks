@@ -1,0 +1,62 @@
+.SideBar {
+    width: 100%;
+    box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.5);
+    background: var(--c200);
+    user-select: none;
+
+    .s-cnt-header {
+        width: 100%;
+        height: 100px;
+        position: relative;
+
+        .s-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .s-back-white {
+            position: absolute;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            background: rgb(206, 216, 233);
+            background: linear-gradient(0deg, rgba(206, 216, 233, 1) 0%, rgba(255, 255, 255, 0.19371498599439774) 100%);
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: var(--c950);
+        }
+    }
+
+    .s-tasks {
+        width: 100%;
+
+        .s-ul {
+            width: 100%;
+            height: calc(100vh - 100px);
+            padding: 10px 0;
+            overflow: auto;
+
+            .s-li {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                height: 45px;
+                padding: 0 15px;
+                cursor: pointer;
+                transition: all 0.5s;
+
+                &:hover {
+                    background: var(--c50);
+                    color: #000;
+                    font-weight: 500;
+                }
+            }
+        }
+    }
+}

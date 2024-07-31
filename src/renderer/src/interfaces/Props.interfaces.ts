@@ -4,3 +4,7 @@ export interface LayoutProps {
     children: ReactNode
     className?: string
 }
+
+export interface ClassProps{
+    className?: string
+}

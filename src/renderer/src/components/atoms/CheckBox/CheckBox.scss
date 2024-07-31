@@ -1,0 +1,39 @@
+.Container-checkBox {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+
+    .circle-input {
+        width: 15px;
+        height: 15px;
+        border-radius: 50%;
+        box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.5);
+        padding: 2px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+
+        .checkbox {
+            appearance: none;
+            display: inline-block;
+            width: 100%;
+            height: 100%;
+            background-color: var(--c300);
+            border-radius: 50%;
+            cursor: pointer;
+        }
+
+        .checkbox:checked {
+            background-color: green;
+        }
+    }
+
+    .check-label {
+        color: #000;
+        font-weight: 500;
+        font-size: 1rem;
+        user-select: none;
+        cursor: pointer;
+    }
+}

@@ -65,15 +65,16 @@ body.noScrollBar::-webkit-scrollbar {
   border: 0 solid #ffffff;
 }
 
-@font-face {
+/* @font-face {
   font-family: "Metropolis";
   src: local("Metropolis"),
       url(./assets/fonts/metropolis/Metropolis-Regular.otf);
-}
+} */
 
 body {
-  font-family: "Metropolis", sans-serif;
-  font-size: 15px;
+  /* font-family: "Metropolis", sans-serif; */
+  font-size: 1rem;
+  background: var(--c100);
 }
 
 li {
