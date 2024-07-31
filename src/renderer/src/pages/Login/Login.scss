@@ -1,3 +1,14 @@
-.Login{
-    
+.Login {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    .l-card {
+        width: 500px;
+        height: 350px;
+        border-radius: 10px;
+        box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.5);
+        background: var(--c50);
+    }
 }
