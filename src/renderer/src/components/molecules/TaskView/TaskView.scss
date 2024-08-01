@@ -30,10 +30,16 @@
                     font-style: 1.2rem;
                 }
 
-                .t-date {
-                    font-size: .8rem;
-                    color: gray;
-                    font-weight: 500;
+                .t-cnt-dates{
+                    display: flex;
+                    align-items: center;
+                    gap: 10px;
+                    
+                    .t-date {
+                        font-size: .8rem;
+                        color: gray;
+                        font-weight: 500;
+                    }
                 }
             }
 
@@ -48,6 +54,16 @@
                 }
             }
         }
+
+        .t-cnt-sta{
+           
+        }
+    }
+
+    .s-title-spa{
+        font-size: 0.9rem;
+        color: gray;
+        font-weight: 5000;
     }
 
     .t-btn-close{
