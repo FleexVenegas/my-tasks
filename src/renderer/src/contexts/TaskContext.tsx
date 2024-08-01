@@ -1,23 +1,23 @@
-import React, { createContext, useState, Dispatch, SetStateAction } from 'react';
+import React, { createContext, useState, Dispatch, SetStateAction } from 'react'
 
 // Define el tipo del contexto
 interface TasksContextType {
-    selectedTask: number | null;
-    setSelectedTask: Dispatch<SetStateAction<number | null>>;
+    selectedTask: number | null
+    setSelectedTask: Dispatch<SetStateAction<number | null>>
 }
 
 // Inicializar el contexto con un valor predeterminado
 export const TasksContext = createContext<TasksContextType>({
     selectedTask: null,
-    setSelectedTask: () => {} // Función de no-op como placeholder
-});
+    setSelectedTask: () => {}
+})
 
 interface Props {
-    children: React.ReactNode;
+    children: React.ReactNode
 }
 
 export const TasksProvider = ({ children }: Props) => {
-    const [selectedTask, setSelectedTask] = useState<number | null>(null);
+    const [selectedTask, setSelectedTask] = useState<number | null>(null)
 
     return (
         <TasksContext.Provider
@@ -28,5 +28,5 @@ export const TasksProvider = ({ children }: Props) => {
         >
             {children}
         </TasksContext.Provider>
-    );
-};
+    )
+}

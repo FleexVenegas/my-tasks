@@ -1,6 +1,7 @@
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
-import Login from './pages/Login/Login'
+// import Login from './pages/Login/Login'
 import Layout from './components/organisms/Layout/Layout'
+import Task from './pages/Task/Task'
 
 const App = () => {
     return (
@@ -8,7 +9,7 @@ const App = () => {
             <Router>
                 <Layout>
                     <Routes>
-                        <Route path="/" element={<Login />} />
+                        <Route path="/" element={<Task />} />
                     </Routes>
                 </Layout>
             </Router>

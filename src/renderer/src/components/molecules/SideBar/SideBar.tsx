@@ -5,82 +5,85 @@ import './SideBar.scss'
 //Assets
 import Folder from '../../../assets/images/folderColors.jpg'
 import CheckBox from '@renderer/components/atoms/CheckBox/CheckBox'
+import { useStoreTask } from '@renderer/zustan/ZustanContext'
 
 const SideBar = ({ className = '' }: ClassProps) => {
     const tasks = [
         {
-            id: 1,
+            id: '1',
             task: 'Generar un reporte',
             date: '97/12/16',
             status: false
         },
         {
-            id: 2,
+            id: '2',
             task: 'Corregir los bugs',
             date: '97/12/16',
             status: false
         },
         {
-            id: 1,
+            id: '3',
             task: 'Generar un reporte',
             date: '97/12/16',
             status: false
         },
         {
-            id: 2,
+            id: '4',
             task: 'Corregir los bugs',
             date: '97/12/16',
             status: false
         },
         {
-            id: 1,
+            id: '5',
             task: 'Generar un reporte',
             date: '97/12/16',
             status: false
         },
         {
-            id: 2,
+            id: '6',
             task: 'Corregir los bugs',
             date: '97/12/16',
             status: false
         },
         {
-            id: 1,
+            id: '7',
             task: 'Generar un reporte',
             date: '97/12/16',
             status: false
         },
         {
-            id: 2,
+            id: '8',
             task: 'Corregir los bugs',
             date: '97/12/16',
             status: false
         },
         {
-            id: 1,
+            id: '9',
             task: 'Generar un reporte',
             date: '97/12/16',
             status: false
         },
         {
-            id: 2,
+            id: '10',
             task: 'Corregir los bugs',
             date: '97/12/16',
             status: false
         },
         {
-            id: 1,
+            id: '11',
             task: 'Generar un reporte',
             date: '97/12/16',
             status: false
         },
         {
-            id: 2,
+            id: '12',
             task: 'Corregir los bugs',
             date: '97/12/16',
             status: false
         }
     ]
+
+    const { selectedTask } = useStoreTask()
 
     return (
         <aside className={`SideBar ${className}`}>
@@ -91,9 +94,9 @@ const SideBar = ({ className = '' }: ClassProps) => {
             <div className="s-tasks">
                 <ul className="s-ul">
                     {tasks.map((_, idx) => (
-                        <li key={idx} className="s-li">
+                        <li key={idx} className="s-li" onClick={() => selectedTask(_.id)}>
                             <span>{_.task}</span>
-                            <CheckBox isChecked={_.status}/>
+                            {/* <CheckBox isChecked={_.status} /> */}
                         </li>
                     ))}
                 </ul>
