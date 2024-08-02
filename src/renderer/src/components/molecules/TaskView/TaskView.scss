@@ -6,15 +6,27 @@
     justify-content: center;
     align-items: center;
 
-    
+
     .t-cnt-task {
         width: 350px;
-        height: 250px;
+        height: 280px;
         box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.5);
         border-radius: 10px;
         background: var(--c50);
         padding: 30px 25px;
         position: relative;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+
+
+        &.bg-edit{
+            background: var(--c200);
+        }
+
+        &.bg-delete{
+            background: rgb(247, 204, 204);
+        }
 
         .t-cnt-up {
             display: flex;
@@ -30,17 +42,55 @@
                     font-style: 1.2rem;
                 }
 
-                .t-cnt-dates{
+                .t-cnt-d-btn {
                     display: flex;
                     align-items: center;
-                    gap: 10px;
-                    
-                    .t-date {
-                        font-size: .8rem;
-                        color: gray;
-                        font-weight: 500;
+                    justify-content: space-between;
+
+                    .t-cnt-dates {
+                        display: flex;
+                        align-items: center;
+                        gap: 10px;
+
+                        .t-date {
+                            font-size: .8rem;
+                            color: gray;
+                            font-weight: 500;
+                        }
+                    }
+
+                    .t-btn {
+                        display: flex;
+                        gap: 10px;
+                        align-items: center;
+
+                        &:hover {
+
+                            path {
+                                transition: all 0.5s;
+
+                                &:hover {
+                                    fill: var(--c800);
+                                }
+                            }
+
+                        }
+
+                        .t-btn_ac {
+                            border: none;
+                            background: none;
+                            cursor: pointer;
+
+                            .t-img {
+                                &:hover {
+                                    filter: invert(22%) sepia(39%) saturate(756%) hue-rotate(179deg) brightness(86%) contrast(88%);
+                                }
+                            }
+
+                        }
                     }
                 }
+
             }
 
             .t-cnt-body {
@@ -55,18 +105,20 @@
             }
         }
 
-        .t-cnt-sta{
-           
+        .t-cnt-sta {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
         }
     }
 
-    .s-title-spa{
+    .s-title-spa {
         font-size: 0.9rem;
         color: gray;
         font-weight: 5000;
     }
 
-    .t-btn-close{
+    .t-btn-close {
         position: absolute;
         top: 10px;
         right: 10px;
