@@ -20,8 +20,6 @@ const Task = () => {
 
     const data = []
 
-    // const db = initializeDatabase()
-
     return (
         <>
             <CardView className="Task">
