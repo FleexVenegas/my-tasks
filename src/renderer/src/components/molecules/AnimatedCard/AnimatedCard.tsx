@@ -1,4 +1,4 @@
-import { Dispatch, ReactNode, SetStateAction, useEffect, useState } from 'react'
+import { ReactNode, useEffect, useState } from 'react'
 
 //Styles
 import './AnimatedCard.scss'
@@ -6,7 +6,7 @@ import './AnimatedCard.scss'
 interface AnimatedProps {
     className?: string
     children: ReactNode
-    setClose: Dispatch<SetStateAction<boolean>>
+    setClose: (value: boolean) => void
 }
 
 const AnimatedCard = ({ className = '', children, setClose }: AnimatedProps) => {
