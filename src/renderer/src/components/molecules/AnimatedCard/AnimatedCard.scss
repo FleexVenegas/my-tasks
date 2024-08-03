@@ -1,0 +1,38 @@
+.AnimatedCard {
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 90;
+
+    .cnt-animated {
+        position: relative;
+        opacity: 0;
+        border-radius: 10px;
+        box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.5);
+        transition: all 0.5s;
+
+        &.opacity-on {
+            opacity: 1;
+        }
+
+        .c-btn-close {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            border: none;
+            background: transparent;
+            cursor: pointer;
+            z-index: 1;
+
+        }
+
+    }
+}

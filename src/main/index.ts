@@ -60,7 +60,7 @@ app.whenReady().then(() => {
     //         return { status: 404, data: 'No se encontro ningún registro', message: error }
     //     }
     // })
-    const db = initializeDatabase()
+    // const db = initializeDatabase()
     createWindow()
 
     app.on('activate', function () {
