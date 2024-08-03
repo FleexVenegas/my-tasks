@@ -30,24 +30,15 @@ const TaskView = () => {
         alert(`Id: ${id}`)
     }
 
-    const onMouseEdit = () => {
-        setOverEdit(true)
-    }
+    const handleMouse = (setter: any, value: boolean) => () => setter(value)
 
-    const onMouseEditLeave = () => {
-        setOverEdit(false)
-    }
-
-    const onMouseRemoveEnter = () => {
-        setOverRemove(true)
-    }
-    const onMouseRemoveLeave = () => {
-        setOverRemove(false)
-    }
+    const onMouseEdit = handleMouse(setOverEdit, true)
+    const onMouseEditLeave = handleMouse(setOverEdit, false)
+    const onMouseRemoveEnter = handleMouse(setOverRemove, true)
+    const onMouseRemoveLeave = handleMouse(setOverRemove, false)
 
     return (
         <div className="TaskView">
-            
             {info.map((_, idx) => (
                 <div
                     className={`t-cnt-task ${overRemove ? 'bg-delete' : ''} ${overEdit ? 'bg-edit' : ''}`}

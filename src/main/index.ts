@@ -2,6 +2,7 @@ import { app, shell, BrowserWindow, ipcMain } from 'electron'
 import { join } from 'path'
 import { electronApp, optimizer, is } from '@electron-toolkit/utils'
 import icon from '../../resources/task_r.png?asset'
+import { initializeDatabase } from '../renderer/src/api/database/config'
 
 function createWindow(): void {
     // Create the browser window.
@@ -50,14 +51,27 @@ app.whenReady().then(() => {
     })
 
     // IPC test
-    ipcMain.on('ping', () => console.log('pong'))
-
+    // ipcMain.on('ping', () => console.log('pong'))
+    // ipcMain.handle('get-data', async (_, searchOption: SearchProps) => {
+    //     try {
+    //         const response = getAllData(searchOption)
+    //         return { status: 200, data: response }
+    //     } catch (error) {
+    //         return { status: 404, data: 'No se encontro ningún registro', message: error }
+    //     }
+    // })
+    const db = initializeDatabase()
     createWindow()
 
     app.on('activate', function () {
         // On macOS it's common to re-create a window in the app when the
         // dock icon is clicked and there are no other windows open.
         if (BrowserWindow.getAllWindows().length === 0) createWindow()
+    })
+
+    //Cerramos al conexion cuando se cierran las ventanas
+    app.on('window-all-closed', () => {
+        db.close()
     })
 })
 

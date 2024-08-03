@@ -36,6 +36,11 @@
     .s-tasks {
         width: 100%;
 
+        .s-cnt_in{
+            width: 100%;
+            padding: 0 15px;
+        }
+
         .s-ul {
             width: 100%;
             height: calc(100vh - 100px);

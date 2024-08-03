@@ -1,5 +1,6 @@
 :root {
   --white: #fff;
+  --gray: #808080;
   --c50: #f4f6fb;
   --c100: #e9edf5;
   --c200: #ced8e9;
@@ -20,6 +21,7 @@
   margin: 0;
   padding: 0;
   line-height: 1;
+
 }
 
 a {
@@ -72,7 +74,7 @@ body.noScrollBar::-webkit-scrollbar {
 } */
 
 body {
-  /* font-family: "Metropolis", sans-serif; */
+  font-family: "Monserrat", sans-serif;
   font-size: 1rem;
   background: var(--c100);
 }
