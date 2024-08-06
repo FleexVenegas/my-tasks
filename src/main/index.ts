@@ -2,7 +2,7 @@ import { app, shell, BrowserWindow, ipcMain } from 'electron'
 import { join } from 'path'
 import { electronApp, optimizer, is } from '@electron-toolkit/utils'
 import icon from '../../resources/task_r.png?asset'
-import { getTask, insertTask } from '../renderer/src/api/models/Task'
+import { getTask, insertTask, getTaskOne } from '../renderer/src/api/models/Task'
 import { CreateTask } from '../renderer/src/interfaces/Props.interfaces'
 
 function createWindow(): void {
@@ -51,17 +51,6 @@ app.whenReady().then(() => {
         optimizer.watchWindowShortcuts(window)
     })
 
-    // IPC test
-    // ipcMain.on('ping', () => console.log('pong'))
-    // ipcMain.handle('get-data', async (_, searchOption: SearchProps) => {
-    //     try {
-    //         const response = getAllData(searchOption)
-    //         return { status: 200, data: response }
-    //     } catch (error) {
-    //         return { status: 404, data: 'No se encontro ningún registro', message: error }
-    //     }
-    // })
-
     ipcMain.handle('get-data', async (_, op: string) => {
         try {
             const response = getTask(op)
@@ -74,6 +63,15 @@ app.whenReady().then(() => {
     ipcMain.handle('create-task', async (_, task: CreateTask) => {
         try {
             const response = insertTask(task)
+            return { status: true, data: response }
+        } catch (error) {
+            return { status: 404, data: 'No se encontro ningún registro', message: error }
+        }
+    })
+
+    ipcMain.handle('get-task-one', async (_, id: string) => {
+        try {
+            const response = getTaskOne(id)
             return { status: true, data: response }
         } catch (error) {
             return { status: 404, data: 'No se encontro ningún registro', message: error }

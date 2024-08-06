@@ -1,26 +1,58 @@
-import Toggle from '@renderer/components/atoms/Toggle/Toggle'
+import { Dispatch, SetStateAction, useEffect, useState } from 'react'
+
+//Styles
 import './TaskView.scss'
 
 //Assets
 import Delete from '../../../assets/icons/delete.svg'
 import Edit from '../../../assets/icons/edit.svg'
-import { useState } from 'react'
 
-const TaskView = () => {
+//components
+import Toggle from '@renderer/components/atoms/Toggle/Toggle'
+import { api } from '@renderer/api/services/api'
+
+interface TaskViewProps {
+    id: string | null
+    // setClose: Dispatch<SetStateAction<boolean>>
+}
+
+const TaskView = ({ id }: TaskViewProps) => {
+    // const [cardClose, setCardClose] = useState(false)
     const [overEdit, setOverEdit] = useState(false)
     const [overRemove, setOverRemove] = useState(false)
+    const [info, setInfo] = useState([])
 
-    const info = [
-        {
-            id: '1',
-            title: 'Bugs',
-            date: '01/07/2024',
-            date_: '01/07/2024',
-            description:
-                'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Architecto non eaque magnam fugit voluptates molestiae.',
-            is_active: true
+    useEffect(() => {
+        const getTaskOne = () => {
+            try {
+                api.getTaskOne(id ? id : '').then((response) => {
+                    const { status, data } = response
+                    if (status) {
+                        setInfo(data)
+                    }
+                })
+            } catch (error) {
+                console.log(`Ocurrio un error ${error}`)
+            }
         }
-    ]
+        getTaskOne()
+
+        return () => {
+            id = ''
+        }
+    }, [])
+
+    // const info = [
+    //     {
+    //         id: '1',
+    //         title: 'Bugs',
+    //         date: '01/07/2024',
+    //         date_: '01/07/2024',
+    //         description:
+    //             'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Architecto non eaque magnam fugit voluptates molestiae.',
+    //         is_active: true
+    //     }
+    // ]
 
     const handleEdit = (id: string) => {
         alert(`Id: ${id}`)
@@ -39,7 +71,7 @@ const TaskView = () => {
 
     return (
         <div className="TaskView">
-            {info.map((_, idx) => (
+            {info?.map((_, idx) => (
                 <div
                     className={`t-cnt-task ${overRemove ? 'bg-delete' : ''} ${overEdit ? 'bg-edit' : ''}`}
                     key={idx}
@@ -83,7 +115,7 @@ const TaskView = () => {
                         <Toggle initialValue={_.is_active} />
                     </div>
 
-                    <button className="t-btn-close">✖️</button>
+                    {/* <button className="t-btn-close" onClick={handleClose}>✖️</button> */}
                 </div>
             ))}
         </div>

@@ -1,7 +1,6 @@
 .TaskView {
     width: 100%;
     height: 100%;
-
     display: flex;
     justify-content: center;
     align-items: center;
@@ -20,11 +19,11 @@
         justify-content: space-between;
 
 
-        &.bg-edit{
+        &.bg-edit {
             background: var(--c200);
         }
 
-        &.bg-delete{
+        &.bg-delete {
             background: rgb(247, 204, 204);
         }
 
@@ -127,4 +126,6 @@
         cursor: pointer;
         font-size: .7rem;
     }
+
+
 }

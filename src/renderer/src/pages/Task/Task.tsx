@@ -9,21 +9,28 @@ import Table from '../../components/organisms/Table/Table'
 import { columns } from './TableData'
 import AnimatedCard from '@renderer/components/molecules/AnimatedCard/AnimatedCard'
 import NewTask from '../NewTask/NewTask'
+import TaskView from '@renderer/components/molecules/TaskView/TaskView'
 
 const Task = () => {
-    const { newTask, setNewTask } = useStoreTask()
-    // const [isSelected, setIsSelected] = useState(false)
+    const { newTask, setNewTask, task } = useStoreTask()
+    const [isSelected, setIsSelected] = useState(false)
 
-    // useEffect(() => {
-    //     setIsSelected(true)
-    // }, [task])
+    useEffect(() => {
+        if (task !== null) {
+            setIsSelected(true)
+        }
+    }, [task])
 
     const data = []
 
     return (
         <>
             <CardView className="Task">
-                {/* {isSelected && <TaskView />} */}
+                {isSelected && (
+                    <AnimatedCard setClose={setIsSelected}>
+                        <TaskView id={task} />
+                    </AnimatedCard>
+                )}
 
                 <ReportCard />
                 <div className="t-body_">

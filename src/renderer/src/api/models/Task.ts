@@ -49,3 +49,17 @@ export const getTask = (op: string) => {
         return []
     }
 }
+
+export const getTaskOne = (id: string) => {
+    try {
+        const db = initializeDatabase()
+
+        const selectQuery = 'SELECT * FROM task WHERE id = ?'
+        const stmt = db.prepare(selectQuery)
+        const row = stmt.get(id)
+
+        return row
+    } catch (error) {
+        console.log(`Ocurrio un error ${error}`)
+    }
+}
