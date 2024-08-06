@@ -10,6 +10,7 @@ interface InputProps {
     type: 'text' | 'email' | 'number'
     placeholder?: string
     onChange?: ChangeEventHandler<HTMLInputElement>
+    required?: boolean
 }
 
 const Input = ({
@@ -19,7 +20,8 @@ const Input = ({
     value,
     type = 'text',
     placeholder,
-    onChange
+    onChange,
+    required
 }: InputProps) => {
     return (
         <div className={`Input ${className}`}>
@@ -31,6 +33,7 @@ const Input = ({
                 value={value}
                 placeholder={placeholder}
                 onChange={onChange}
+                required={required}
             />
         </div>
     )

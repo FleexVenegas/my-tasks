@@ -1,16 +1,20 @@
-.NewTask{
+.NewTask {
     padding: 40px 20px 20px;
     background: var(--c100);
     border-radius: 10px;
     box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.5);
+    width: 300px;
 
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-
-    .n-cnt-btn{
-        width: 100%;
+    .n-form {
         display: flex;
-        justify-content: flex-end;
+        flex-direction: column;
+        gap: 20px;
+
+        .n-cnt-btn {
+            width: 100%;
+            display: flex;
+            justify-content: flex-end;
+        }
     }
+
 }

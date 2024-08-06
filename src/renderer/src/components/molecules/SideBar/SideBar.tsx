@@ -6,61 +6,59 @@ import './SideBar.scss'
 import Folder from '../../../assets/images/folderColors.jpg'
 // import CheckBox from '@renderer/components/atoms/CheckBox/CheckBox'
 import { useStoreTask } from '@renderer/zustan/ZustanContext'
-import Input from '@renderer/components/atoms/Input/Input'
-import { useEffect } from 'react'
-import { api } from '@renderer/api/services/api'
+import Input from '../../..//components/atoms/Input/Input'
+import { useEffect, useState } from 'react'
+import { api } from '../../../api/services/api'
+import CheckBox from '@renderer/components/atoms/CheckBox/CheckBox'
+
+interface dataResponse {
+    id: string
+    title: string
+    description: string
+    status: string | boolean
+    completed_at: string
+    created_at: string
+    updated_at: string
+}
+
+interface dataRes_ {
+    status: number
+    data: dataResponse[]
+}
 
 const SideBar = ({ className = '' }: ClassProps) => {
-    const tasks = [
-        {
-            id: '1',
-            title: 'Bugs',
-            date: '01/07/2024',
-            date_: '01/07/2024',
-            description:
-                'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Architecto non eaque magnam fugit voluptates molestiae.',
-            is_active: true
-        },
-        {
-            id: '2',
-            title: 'Bugs',
-            date: '01/07/2024',
-            date_: '01/07/2024',
-            description:
-                'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Architecto non eaque magnam fugit voluptates molestiae.',
-            is_active: true
-        },
-        {
-            id: '3',
-            title: 'Bugs',
-            date: '01/07/2024',
-            date_: '01/07/2024',
-            description:
-                'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Architecto non eaque magnam fugit voluptates molestiae.',
-            is_active: true
-        },
-        {
-            id: '4',
-            title: 'Bugs',
-            date: '01/07/2024',
-            date_: '01/07/2024',
-            description:
-                'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Architecto non eaque magnam fugit voluptates molestiae.',
-            is_active: true
-        }
-    ]
+    const [tasks, setTasks] = useState<dataResponse[]>([])
 
     const { selectedTask } = useStoreTask()
 
     useEffect(() => {
         try {
-            api.getData('p').then((response) => {
-                console.log(response.data)
+            api.getData('p').then((response: dataRes_) => {
+                const { status, data } = response
+
+                if (status) {
+                    const newArray = data.map((item) => {
+                        return {
+                            ...item,
+                            status: item.status === 'in_progress' ? false : ''
+                        }
+                    })
+
+                    setTasks(newArray)
+                }
             })
         } catch (error) {
             console.log(`Ocurrio un error ${error}`)
         }
     }, [])
+
+    const [isCheck, setIsCheck] = useState(false)
+
+    useEffect(() => {
+        if (isCheck) {
+            alert('Actibando')
+        }
+    }, [isCheck])
 
     return (
         <aside className={`SideBar ${className}`}>
@@ -76,7 +74,10 @@ const SideBar = ({ className = '' }: ClassProps) => {
                     {tasks.map((_, idx) => (
                         <li key={idx} className="s-li" onClick={() => selectedTask(_.id)}>
                             <span>{_.title}</span>
-                            {/* <CheckBox isChecked={_.status} /> */}
+                            <CheckBox
+                                isChecked={typeof _.status === 'boolean' ? _.status : false}
+                                setIsChecked={setIsCheck}
+                            />
                         </li>
                     ))}
                 </ul>

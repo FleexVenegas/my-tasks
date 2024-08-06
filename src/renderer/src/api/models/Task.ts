@@ -1,12 +1,8 @@
 import { initializeDatabase } from '../database/config'
+import { v4 as uuidv4 } from 'uuid'
 
 // Función para insertar un registro en la tabla 'task'
-export const insertTask = (task: {
-    id: string
-    title: string
-    description?: string
-    status?: string
-}) => {
+export const insertTask = (task: { title: string; description?: string }) => {
     const db = initializeDatabase()
 
     const insertQuery = `
@@ -14,31 +10,29 @@ export const insertTask = (task: {
         VALUES (?, ?, ?)
     `
 
+    const id = uuidv4()
+
     const stmt = db.prepare(insertQuery)
-    stmt.run(task.id, task.title, task.description)
+    stmt.run(id, task.title, task.description)
 
-    console.log('Registro insertado exitosamente.')
-
-    db.close()
+    return { message: 'Tarea registrada correctamente' }
 }
 
 export const getTask = (op: string) => {
     try {
         const db = initializeDatabase()
 
-        console.log(op)
-
         let selectQuery = 'SELECT id, title, description, status FROM task'
         const conditions: string[] = []
 
         if (op === 'p') {
-            conditions.push('status = "in_progress"')
+            conditions.push("status = 'in_progress'")
         }
         if (op === 'c') {
-            conditions.push('status = "completed"')
+            conditions.push("status = 'completed'")
         }
         if (op === 'd') {
-            conditions.push('status = "disabled"')
+            conditions.push("status = 'disabled'")
         }
 
         // Añadir condiciones a la consulta si existen

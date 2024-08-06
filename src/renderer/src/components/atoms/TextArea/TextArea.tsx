@@ -7,6 +7,7 @@ interface TextAreaProps {
     value?: string
     placeholder?: string
     onChange?: ChangeEventHandler<HTMLTextAreaElement>
+    required?: boolean
 }
 
 //Styles
@@ -18,7 +19,8 @@ const TextArea: React.FC<TextAreaProps> = ({
     name,
     value,
     placeholder,
-    onChange
+    onChange,
+    required
 }) => {
     return (
         <div className={`TextArea ${className}`}>
@@ -27,8 +29,9 @@ const TextArea: React.FC<TextAreaProps> = ({
                 className={'cs-textarea'}
                 name={name}
                 value={value}
-                placeholder={placeholder}
+                placeholder={placeholder}   
                 onChange={onChange}
+                required={required}
             />
         </div>
     )

@@ -5,6 +5,11 @@ export interface LayoutProps {
     className?: string
 }
 
-export interface ClassProps{
+export interface ClassProps {
     className?: string
+}
+
+export interface CreateTask {
+    title: string
+    description: string
 }

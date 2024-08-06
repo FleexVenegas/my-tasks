@@ -2,8 +2,8 @@ import { app, shell, BrowserWindow, ipcMain } from 'electron'
 import { join } from 'path'
 import { electronApp, optimizer, is } from '@electron-toolkit/utils'
 import icon from '../../resources/task_r.png?asset'
-import { initializeDatabase } from '../renderer/src/api/database/config'
-import { getTask } from '../renderer/src/api/models/Task'
+import { getTask, insertTask } from '../renderer/src/api/models/Task'
+import { CreateTask } from '../renderer/src/interfaces/Props.interfaces'
 
 function createWindow(): void {
     // Create the browser window.
@@ -66,6 +66,15 @@ app.whenReady().then(() => {
         try {
             const response = getTask(op)
             return { status: 200, data: response }
+        } catch (error) {
+            return { status: 404, data: 'No se encontro ningún registro', message: error }
+        }
+    })
+
+    ipcMain.handle('create-task', async (_, task: CreateTask) => {
+        try {
+            const response = insertTask(task)
+            return { status: true, data: response }
         } catch (error) {
             return { status: 404, data: 'No se encontro ningún registro', message: error }
         }
