@@ -1,11 +1,6 @@
 export const api = {
-    getData: (searchOption: any) => {
+    getData: (op: string) => {
         // @ts-ignore (define in dts)
-        return window.electron.ipcRenderer.invoke('get-data', searchOption)
-    },
-
-    getDataTotal: () => {
-        // @ts-ignore (define in dts)
-        return window.electron.ipcRenderer.invoke('get-total')
+        return window.electron.ipcRenderer.invoke('get-data', op)
     }
 }
