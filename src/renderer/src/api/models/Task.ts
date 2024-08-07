@@ -53,13 +53,14 @@ export const getTask = (op: string) => {
 export const getTaskOne = (id: string) => {
     try {
         const db = initializeDatabase()
-
+        const id_ = id
         const selectQuery = 'SELECT * FROM task WHERE id = ?'
         const stmt = db.prepare(selectQuery)
-        const row = stmt.get(id)
+        const row = stmt.get(id_)
 
         return row
     } catch (error) {
         console.log(`Ocurrio un error ${error}`)
+        return []
     }
 }

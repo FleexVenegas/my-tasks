@@ -12,7 +12,7 @@ import Toggle from '@renderer/components/atoms/Toggle/Toggle'
 import { api } from '@renderer/api/services/api'
 
 interface TaskViewProps {
-    id: string | null
+    id: string
     // setClose: Dispatch<SetStateAction<boolean>>
 }
 
@@ -25,10 +25,14 @@ const TaskView = ({ id }: TaskViewProps) => {
     useEffect(() => {
         const getTaskOne = () => {
             try {
-                api.getTaskOne(id ? id : '').then((response) => {
+                api.getTaskOne(id).then((response) => {
                     const { status, data } = response
                     if (status) {
-                        setInfo(data)
+                        if (data && data !== undefined && data.lenght > 0) {
+                            setInfo(data)
+                        } else {
+                            setInfo([])
+                        }
                     }
                 })
             } catch (error) {
