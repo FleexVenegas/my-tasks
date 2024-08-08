@@ -1,0 +1,75 @@
+.select-container {
+    position: relative;
+    width: 200px;
+    font-family: Arial, sans-serif;
+
+    .s-cnt-input {
+        position: relative;
+        cursor: pointer;
+
+        .select-header {
+            padding: 10px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            background-color: #fff;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: border-color 0.3s ease;
+            user-select: none;
+
+            &:hover {
+                border-color: #999;
+            }
+        }
+
+        .arrow {
+            pointer-events: none;
+        }
+    }
+
+    .select-options {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        background-color: #fff;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        overflow: hidden;
+        max-height: 0;
+        opacity: 0;
+        transform: translateY(-10px);
+        transition: max-height 0.3s ease, opacity 0.3s ease, transform 0.3s ease;
+        z-index: 1000;
+        pointer-events: none; // Disable clicks while closed
+
+        &.open {
+            max-height: 200px;
+            opacity: 1;
+            transform: translateY(0);
+            pointer-events: auto; // Enable clicks when open
+        }
+
+        .select-option {
+            padding: 10px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+
+            &:hover {
+                background-color: red;
+            }
+
+            &.selected {
+                background-color: green;
+                color: #fff;
+
+                &:hover {
+                    background-color: #0056b3;
+                }
+            }
+        }
+    }
+}
