@@ -29,7 +29,7 @@ interface dataRes_ {
 const SideBar = ({ className = '' }: ClassProps) => {
     const [tasks, setTasks] = useState<dataResponse[]>([])
 
-    const { selectedTask } = useStoreTask()
+    const { selectedTask, setViewTask } = useStoreTask()
 
     useEffect(() => {
         try {
@@ -60,6 +60,11 @@ const SideBar = ({ className = '' }: ClassProps) => {
         }
     }, [isCheck])
 
+    const handleSelect = (id: string) => {
+        setViewTask(true)
+        selectedTask(id)
+    }
+
     return (
         <aside className={`SideBar ${className}`}>
             <div className="s-cnt-header">
@@ -72,7 +77,7 @@ const SideBar = ({ className = '' }: ClassProps) => {
                 </div>
                 <ul className="s-ul">
                     {tasks.map((_, idx) => (
-                        <li key={idx} className="s-li" onClick={() => selectedTask(_.id)}>
+                        <li key={idx} className="s-li" onClick={() => handleSelect(_.id)}>
                             <span>{_.title}</span>
                             <CheckBox
                                 isChecked={typeof _.status === 'boolean' ? _.status : false}

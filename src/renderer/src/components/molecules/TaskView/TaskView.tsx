@@ -10,6 +10,7 @@ import Edit from '../../../assets/icons/edit.svg'
 //components
 import Toggle from '@renderer/components/atoms/Toggle/Toggle'
 import { api } from '@renderer/api/services/api'
+import { responseTask } from '@renderer/interfaces/Props.interfaces'
 
 interface TaskViewProps {
     id: string
@@ -20,18 +21,18 @@ const TaskView = ({ id }: TaskViewProps) => {
     // const [cardClose, setCardClose] = useState(false)
     const [overEdit, setOverEdit] = useState(false)
     const [overRemove, setOverRemove] = useState(false)
-    const [info, setInfo] = useState([])
+    const [info, setInfo] = useState<responseTask[]>([])
 
     useEffect(() => {
         const getTaskOne = () => {
+            console.log(id)
             try {
-                api.getTaskOne(id).then((response) => {
+                api.getTaskOne(id).then((response: any) => {
                     const { status, data } = response
                     if (status) {
-                        if (data && data !== undefined && data.lenght > 0) {
-                            setInfo(data)
-                        } else {
-                            setInfo([])
+                        console.log(data)
+                        if (data && data !== undefined) {
+                            setInfo([data])
                         }
                     }
                 })
@@ -39,24 +40,9 @@ const TaskView = ({ id }: TaskViewProps) => {
                 console.log(`Ocurrio un error ${error}`)
             }
         }
+
         getTaskOne()
-
-        return () => {
-            id = ''
-        }
     }, [])
-
-    // const info = [
-    //     {
-    //         id: '1',
-    //         title: 'Bugs',
-    //         date: '01/07/2024',
-    //         date_: '01/07/2024',
-    //         description:
-    //             'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Architecto non eaque magnam fugit voluptates molestiae.',
-    //         is_active: true
-    //     }
-    // ]
 
     const handleEdit = (id: string) => {
         alert(`Id: ${id}`)
@@ -85,8 +71,8 @@ const TaskView = ({ id }: TaskViewProps) => {
                             <h3 className="t-tile">{_.title}</h3>
                             <div className="t-cnt-d-btn">
                                 <div className="t-cnt-dates">
-                                    <span className="t-date">{_.date}</span>-
-                                    <span className="t-date">{_.date_}</span>
+                                    <span className="t-date">{_.created_at}</span>-
+                                    <span className="t-date">{_.created_at}</span>
                                 </div>
                                 <div className="t-btn">
                                     <button
@@ -116,10 +102,8 @@ const TaskView = ({ id }: TaskViewProps) => {
 
                     <div className="t-cnt-sta">
                         <span className="s-title-spa">Marcar como completada</span>
-                        <Toggle initialValue={_.is_active} />
+                        <Toggle initialValue={_.status === 'in_progress' ? false : true} />
                     </div>
-
-                    {/* <button className="t-btn-close" onClick={handleClose}>✖️</button> */}
                 </div>
             ))}
         </div>
